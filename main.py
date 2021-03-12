@@ -7,8 +7,8 @@ n, generated, tries = greetings()
 while True:
     print(f'Осталось {tries} попыток')
     user_input = input('Введите число: ')
-    user_input = int(user_input)
     if is_valid(user_input, n) and tries > 1:
+            user_input = int(user_input)
             if user_input < generated:
                 print('Ваше число меньше загаданного, попробуйте еще разок')
                 tries -= 1
