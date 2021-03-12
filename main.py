@@ -1,14 +1,9 @@
 import random
 import time
+from functions import *
 
-def is_valid(user_input, n):
-    return True if 1 <= user_input <= n else False
 
-print('Добро пожаловать в числовую угадайку!')
-n = int(input('Введите правую границу для случайного выбора числа: '))
-generated = random.randint(1, n)
-
-tries = 7
+n, generated, tries = greetings()
 
 while True:
     print(f'Осталось {tries} попыток')
@@ -24,22 +19,19 @@ while True:
                 tries -= 1
             elif user_input == generated:
                 print('Вы угадали, поздравляем!')
-                again = input('Сыграть еще разок? (да нет)')
+                again = check_again()
                 if again == 'да':
-                    n = int(input('Введите правую границу для случайного выбора числа: '))
-                    generated = random.randint(1, n)
-                    tries = 7
+                    n, generated, tries = play_again()
                     continue
                 elif again == 'нет':
                     break
         else:
-            again = input('Упс, попытки закончились. Сыграть еще разок? (да нет)')
-            if again != 'нет':
-                n = int(input('Введите правую границу для случайного выбора числа: '))
-                generated = random.randint(1, n)
-                tries = 7
+            print('Упс, попытки закончились.')
+            again = check_again()
+            if again == 'да':
+                n, generated, tries = play_again()
                 continue
-            else:
+            elif again == 'нет':
                 break
     else:
         print(f'А может быть все-таки введем целое число от 1 до {n}?')
